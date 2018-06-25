@@ -19,6 +19,13 @@ namespace Web
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseKestrel(options =>
+                {
+                    options.Limits.MaxConcurrentConnections = 100;
+                    options.Limits.MaxConcurrentUpgradedConnections = 100;
+                    options.Limits.MaxRequestBodySize = 10 * 1024;
+                })
+                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                 .Build();
     }
