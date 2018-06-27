@@ -1,0 +1,23 @@
+@model IColletion<TestMvc.Models.Video>
+
+<h2>Videos</h2>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Date</th>
+    </tr>
+
+    @foreach (var video in Model)
+    {
+        <tr>
+            <td>
+                <a href="@video.Url">@video.Title</a>
+            </td>
+            <td>
+                @video.PublishDate
+            </td>
+        </tr>
+    }
+    
+</table>
