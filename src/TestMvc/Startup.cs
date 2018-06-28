@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace TestMvc
 {
@@ -25,8 +26,20 @@ namespace TestMvc
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, 
+                              IHostingEnvironment env,
+                              ILoggerFactory loggerFactory)
         {
+            // Usa o arquivo appsettings
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+
+            // Defino o nível manualmente
+            //loggerFactory.AddConsole(LogLevel.Error);
+            //loggerFactory.AddConsole(LogLevel.Information);
+            loggerFactory.AddConsole(LogLevel.Debug);
+            
+            loggerFactory.AddDebug();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
